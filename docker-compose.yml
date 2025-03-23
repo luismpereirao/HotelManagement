@@ -1,28 +1,33 @@
-# 🛠️ Fase de compilación (Build Stage)
-FROM maven:3.9.6-eclipse-temurin-21 AS build
-WORKDIR /app
-  
-  # Copiar archivos del proyecto y descargar dependencias
-COPY pom.xml .
-RUN mvn dependency:go-offline
-  
-  # Copiar el código fuente y compilar
-COPY src ./src
-RUN mvn clean package -DskipTests
-  
-  # 🚀 Fase de ejecución (Imagen final optimizada)
-FROM eclipse-temurin:21-jre
-WORKDIR /app
-  
-  # Copiar el JAR generado
-COPY --from=build /app/target/*.jar app.jar
-  
-  # Usar un usuario no root por seguridad
-RUN addgroup --system spring && adduser --system --ingroup spring spring
-USER spring
-  
-  # Exponer el puerto de la aplicación
-EXPOSE 8080
-  
-  # Comando de inicio con optimización de memoria
-ENTRYPOINT ["java", "-XX:+UseContainerSupport", "-XX:MaxRAMPercentage=75.0", "-jar", "app.jar"]
+version: '3.8'
+
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://db:3306/mi_base?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC
+      SPRING_DATASOURCE_USERNAME: user
+      SPRING_DATASOURCE_PASSWORD: password
+      SPRING_JPA_HIBERNATE_DDL_AUTO: update
+      SPRING_JPA_PROPERTIES_HIBERNATE_DIALECT: org.hibernate.dialect.MySQL8Dialect
+    depends_on:
+      - mysql
+
+  mysql:
+    image: mysql:8.0
+    restart: always
+    environment:
+      MYSQL_DATABASE: mi_base
+      MYSQL_USER: user
+      MYSQL_PASSWORD: password
+      MYSQL_ROOT_PASSWORD: rootpassword
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+
+volumes:
+  mysql_data:
