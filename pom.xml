@@ -9,9 +9,9 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>com</groupId>
-    <artifactId>HotelManagement</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
-    <name>HotelManagement</name>
+    <artifactId>hotel_management</artifactId>
+    <version>0.0.1</version>
+    <name>hotel_management</name>
     <description>HotelManagement</description>
     <url/>
     <licenses>

@@ -1,28 +1,5 @@
-# 🛠️ Fase de compilación (Build Stage)
-FROM maven:3.9.6-eclipse-temurin-21 AS build
-WORKDIR /app
-
-  # Copiar archivos del proyecto y descargar dependencias
-COPY pom.xml .
-RUN mvn dependency:go-offline
-
-  # Copiar el código fuente y compilar
-COPY src ./src
-RUN mvn clean package -DskipTests
-
-  # 🚀 Fase de ejecución (Imagen final optimizada)
-FROM eclipse-temurin:21-jre
-WORKDIR /app
-
-  # Copiar el JAR generado
-COPY --from=build /app/target/*.jar app.jar
-
-  # Usar un usuario no root por seguridad
-RUN addgroup --system spring && adduser --system --ingroup spring spring
-USER spring
-
-  # Exponer el puerto de la aplicación
-EXPOSE 8080
-
-  # Comando de inicio con optimización de memoria
-ENTRYPOINT ["java", "-XX:+UseContainerSupport", "-XX:MaxRAMPercentage=75.0", "-jar", "app.jar"]
+FROM openjdk:21-jdk-slim
+ARG JAR_FILE=target/hotel_management-0.0.1.jar
+COPY ${JAR_FILE} hotel_management_app.jar
+EXPOSE 3000
+ENTRYPOINT ["java", "-jar", "hotel_management_app.jar"]

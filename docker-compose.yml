@@ -1,33 +1,29 @@
-version: '3.8'
-
 services:
-  app:
+  app_hotel:
     build:
       context: .
       dockerfile: Dockerfile
     ports:
       - "3000:3000"
     environment:
-      SPRING_DATASOURCE_URL: jdbc:mysql://db:3306/mi_base?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC
-      SPRING_DATASOURCE_USERNAME: user
-      SPRING_DATASOURCE_PASSWORD: password
-      SPRING_JPA_HIBERNATE_DDL_AUTO: update
-      SPRING_JPA_PROPERTIES_HIBERNATE_DIALECT: org.hibernate.dialect.MySQL8Dialect
-    depends_on:
-      - mysql
-
-  mysql:
-    image: mysql:8.0
+      DB_URL: jdbc:mysql://hotel_mng:3306/hotel_database?createDatabaseIfNotExist=true
+      DB_USER_NAME: root
+      DB_PASSWORD: password
     restart: always
-    environment:
-      MYSQL_DATABASE: mi_base
-      MYSQL_USER: user
-      MYSQL_PASSWORD: password
-      MYSQL_ROOT_PASSWORD: rootpassword
+    depends_on:
+        hotel_mng:
+          condition: service_healthy
+
+  hotel_mng:
+    image: mysql:8.0.33
     ports:
       - "3306:3306"
-    volumes:
-      - mysql_data:/var/lib/mysql
-
-volumes:
-  mysql_data:
+    environment:
+      MYSQL_ROOT_PASSWORD: password
+      MYSQL_PASSWORD: password
+      MYSQL_DATABASE: hotel_database
+    restart: always
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      timeout: 10s
+      retries: 10
