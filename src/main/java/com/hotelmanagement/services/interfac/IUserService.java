@@ -9,8 +9,8 @@ public interface IUserService {
     Response register(User loginRequest);
     Response login(LoginRequest loginRequest);
     Response getAllUsers();
-    Response getUserBookings(String userId);
+    Response getUserBookingsHistory(String userId);
     Response deleteUser(String userId);
-    Response getUser(String userId);
+    Response getUserById(String userId);
     Response getMyInfo(String userId);
 }
