@@ -87,7 +87,7 @@ public class Utils {
         userDTO.setRole(user.getRole());
 
         if (!user.getBookings().isEmpty()) {
-            userDTO.setBookings(user.getBookings().stream().map(booking -> mapBookingEntityToBookingDTOPlusBookedRoom(booking, false).Collectors.toList()));
+            userDTO.setBookings(user.getBookings().stream().map(booking -> mapBookingEntityToBookingDTOPlusBookedRoom(booking, false)).collect(Collectors.toList()));
         }
 
         return userDTO;
