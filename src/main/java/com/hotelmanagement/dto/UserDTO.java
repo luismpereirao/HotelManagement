@@ -1,7 +1,6 @@
 package com.hotelmanagement.dto;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
-import com.hotelmanagement.entities.Booking;
 import lombok.Data;
 
 import java.util.ArrayList;

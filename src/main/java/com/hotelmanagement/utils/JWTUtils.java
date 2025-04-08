@@ -1,7 +1,7 @@
 package com.hotelmanagement.utils;
 
-import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.Claims;
+import io.jsonwebtoken.Jwts;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 

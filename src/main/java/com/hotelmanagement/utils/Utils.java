@@ -8,7 +8,6 @@ import com.hotelmanagement.entities.Room;
 import com.hotelmanagement.entities.User;
 
 import java.security.SecureRandom;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 

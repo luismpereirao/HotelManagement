@@ -1,7 +1,6 @@
 package com.hotelmanagement.repositories;
 
 import com.hotelmanagement.entities.Room;
-import org.springframework.cglib.core.Local;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
