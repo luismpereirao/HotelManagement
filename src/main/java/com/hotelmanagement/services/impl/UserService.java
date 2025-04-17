@@ -103,7 +103,7 @@ public class UserService implements IUserService {
     }
 
     @Override
-    public Response getUserBookings(String userId) {
+    public Response getUserBookingsHistory(String userId) {
         Response response = new Response();
 
         try {
@@ -142,7 +142,7 @@ public class UserService implements IUserService {
     }
 
     @Override
-    public Response getUser(String userId) {
+    public Response getUserById(String userId) {
         Response response = new Response();
 
         try {

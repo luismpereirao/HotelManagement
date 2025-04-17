@@ -75,7 +75,7 @@ public class BookingService implements IBookingService {
             BookingDTO bookingDTO = Utils.mapBookingEntityToBookingDTO(booking);
             response.setStatusCode(200);
             response.setMessage("Booking successful");
-            response.setBookingConfirmationCode(bookingConfirmationCode);
+            response.setBookingConfirmationCode(confirmationCode);
 
         } catch (OurException e) {
             response.setStatusCode(404);
