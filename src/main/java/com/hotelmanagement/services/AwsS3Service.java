@@ -43,7 +43,7 @@ public class AwsS3Service {
 
             PutObjectRequest putObjectRequest = new PutObjectRequest(bucketName, s3FileName, inputStream, metadata);
             s3Client.putObject(putObjectRequest);
-            return "https://" + bucketName + ".amazonaws.com/" + s3FileName;
+            return "https://" + bucketName + ".s3.amazonaws.com/" + s3FileName;
 
         } catch (Exception e) {
             e.printStackTrace();

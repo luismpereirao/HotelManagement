@@ -69,7 +69,7 @@ public class RoomService implements IRoomService {
             List<Room> roomList = roomRepository.findAll(Sort.by(Sort.Direction.DESC, "id"));
             List<RoomDTO> roomDTOList = Utils.mapRoomListEntityToRoomListDTO(roomList);
             response.setStatusCode(200);
-            response.setMessage("Successfully added new room");
+            response.setMessage("Successful");
             response.setRoomList(roomDTOList);
 
         } catch (Exception e) {
@@ -87,7 +87,7 @@ public class RoomService implements IRoomService {
             roomRepository.findById(roomId).orElseThrow(() -> new OurException("Room not found"));
             roomRepository.deleteById(roomId);
             response.setStatusCode(200);
-            response.setMessage("Successfully added new room");
+            response.setMessage("Successfully deleted room");
 
         } catch (OurException e) {
             response.setStatusCode(404);
@@ -117,7 +117,7 @@ public class RoomService implements IRoomService {
             Room updatedRoom = roomRepository.save(room);
             RoomDTO roomDTO = Utils.mapRoomEntityToRoomDTO(updatedRoom);
             response.setStatusCode(200);
-            response.setMessage("Successfully added new room");
+            response.setMessage("Successfully updated new room");
             response.setRoom(roomDTO);
 
         } catch (OurException e) {
@@ -138,7 +138,7 @@ public class RoomService implements IRoomService {
             Room room = roomRepository.findById(roomId).orElseThrow(() -> new OurException("Room not found"));
             RoomDTO roomDTO = Utils.mapRoomEntityToRoomDTOPlusBookings(room);
             response.setStatusCode(200);
-            response.setMessage("Successfully added new room");
+            response.setMessage("Successful");
             response.setRoom(roomDTO);
 
         } catch (OurException e) {
@@ -160,7 +160,7 @@ public class RoomService implements IRoomService {
             List<RoomDTO> roomDTOList = Utils.mapRoomListEntityToRoomListDTO(availableRooms);
 
             response.setStatusCode(200);
-            response.setMessage("Successfully added new room");
+            response.setMessage("Successful");
             response.setRoomList(roomDTOList);
 
         } catch (Exception e) {
@@ -178,7 +178,7 @@ public class RoomService implements IRoomService {
             List<Room> roomList = roomRepository.getAllAvailableRooms();
             List<RoomDTO> roomDTOList = Utils.mapRoomListEntityToRoomListDTO(roomList);
             response.setStatusCode(200);
-            response.setMessage("Successfully added new room");
+            response.setMessage("Successful");
             response.setRoomList(roomDTOList);
 
         } catch (OurException e) {

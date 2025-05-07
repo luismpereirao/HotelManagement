@@ -25,7 +25,7 @@ public class RoomController {
     private IBookingService bookingService;
 
     @PostMapping("/add")
-    @PreAuthorize("hasAuthority('ADMIN')")
+    @PreAuthorize("hasAuthority('ROLE_ADMIN')")
     public ResponseEntity<Response> addNewRoom(
             @RequestParam(value = "photo", required = false) MultipartFile photo,
             @RequestParam(value = "roomType", required = false) String roomType,
@@ -66,7 +66,7 @@ public class RoomController {
     }
 
     @GetMapping("/available-rooms-by-date-and-type")
-    @PreAuthorize("hasAuthority('ADMIN')")
+    @PreAuthorize("hasAuthority('ROLE_ADMIN')")
     public ResponseEntity<Response> getAvailableRoomsByDateAndType(
             @RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate checkInDate,
             @RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate checkOutDate,
@@ -83,7 +83,7 @@ public class RoomController {
     }
 
     @PutMapping("/update/{roomId}")
-    @PreAuthorize("hasAuthority('ADMIN')")
+    @PreAuthorize("hasAuthority('ROLE_ADMIN')")
     public ResponseEntity<Response> updateRoom(
             @PathVariable Long roomId,
             @RequestParam(value = "photo", required = false) MultipartFile photo,
@@ -96,7 +96,7 @@ public class RoomController {
     }
 
     @DeleteMapping("/delete/{roomId}")
-    @PreAuthorize("hasAuthority('ADMIN')")
+    @PreAuthorize("hasAuthority('ROLE_ADMIN')")
     public ResponseEntity<Response> deleteRoom(@PathVariable Long roomId) {
         Response response = roomService.deleteRoom(roomId);
         return ResponseEntity.status(response.getStatusCode()).body(response);
