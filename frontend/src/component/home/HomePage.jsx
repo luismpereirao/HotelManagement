@@ -17,7 +17,7 @@ const HomePage = () => {
         <header className="header-banner">
           <img
             src="./assets/images/hotel.webp"
-            alt="Phegon Hotel"
+            alt="ExtreHotel"
             className="header-image"
           />
           <div className="overlay"></div>
@@ -42,7 +42,7 @@ const HomePage = () => {
       </h4>
 
       <h2 className="home-services">
-        Services at <span className="phegon-color">Phegon Hotel</span>
+        Services at <span className="hotel-color">ExtreHotel</span>
       </h2>
 
       {/* SERVICES SECTION */}
